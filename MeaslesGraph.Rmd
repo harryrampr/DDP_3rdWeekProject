@@ -60,6 +60,7 @@ p <- plot_ly(data = measles,
     add_lines(y = ~median(Monthly),
               x = ~c(min(Year)-.5, Year, max(Year)+.5),
               line = list(color = '#144E75',
+                          dash = 'dot',
                           width = 2),
               name = "Monthly Median") %>% 
     layout(title = list(text = graphTitle,
