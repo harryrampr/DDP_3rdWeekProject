@@ -2,7 +2,7 @@
 title: "Measles Outbreak"
 subtitle: "Presentation"
 author: "Harry Ramirez"
-date: "June 10, 2019"
+date: "June 11, 2019"
 output: ioslides_presentation
 ---
 
@@ -21,24 +21,29 @@ knitr::opts_chunk$set(echo = FALSE)
 }
 </style>
 
-## Code - Part 1
+## R Code - Part 1
 
 ```{r echo = TRUE, message=F, warning=F, class.source='myClass1', comment=""}
 library(plotly)
+library(dplyr)
+library(formattable)
+
+# Load data
 measles <- read.csv("MeaslesCases_5_30_2019.csv")
 head(measles, 3)
 ```
 ```{r echo = TRUE, class.source='myClass1'}
-measles$Monthly <- measles$Cases / measles$Month
+measles$Monthly <- measles$Cases / measles$Months
 graphTitle <- paste0("US Measles Cases<br>",
                      "<span style=\"font-size: 85%;",
                      "color: #144e75\">",
                      "** Up to May 30, 2019</span>")
 ```
 
-## Code - Part 2
+## R Code - Part 2
 
 ```{r echo = TRUE, class.source='myClass2'}
+# Create bar graph
 p <- plot_ly(data = measles,
              x = ~Year,
              y = ~Cases,
@@ -73,3 +78,15 @@ p
 
 <br style="magin_top: 50px;">
 <font size="1">Data extracted from the [CDC Website](https://www.cdc.gov/measles/cases-outbreaks.html).</font>
+
+## Conclusions
+
+- Up to May 30, the monthly rate of Measles cases during 2019 is `r last(measles$Monthly)`. That's *`r percent(last(measles$Monthly) / median(measles$Monthly), 1)`* the last `r nrow(measles)` years monthly median.
+
+- With only five month of data, 2019's up to date cases are `r last(measles$Cases)`. That's *`r percent(last(measles$Cases) / median(measles$Cases))`* the last `r nrow(measles)` years median for hole years.
+
+- We have an Outbreak.
+
+<br style="margin-top: 100px">
+
+### Thanks.
