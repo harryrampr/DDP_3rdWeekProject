@@ -81,12 +81,12 @@ p
 
 ## Conclusions
 
-- Up to May 30, the monthly rate of Measles cases during 2019 is `r last(measles$Monthly)`. That's *`r percent(last(measles$Monthly) / median(measles$Monthly), 1)`* the last `r nrow(measles)` years monthly median.
+- Up to May 30, the monthly rate of Measles cases during 2019 is `r last(measles$Monthly)`. That's **`r percent(last(measles$Monthly) / median(measles$Monthly), 1)`** the last `r nrow(measles)` years monthly median.
 
-- With only five month of data, 2019's up to date cases are `r last(measles$Cases)`. That's *`r percent(last(measles$Cases) / median(measles$Cases))`* the last `r nrow(measles)` years median for hole years.
+- With only five month of data, 2019's up to date cases are `r last(measles$Cases)`. That's **`r percent(last(measles$Cases) / median(measles$Cases))`** the last `r nrow(measles)` years median for hole years.
 
 - We have an Outbreak.
 
 <br style="margin-top: 100px">
 
-### Thanks.
+#### **Thanks.**
