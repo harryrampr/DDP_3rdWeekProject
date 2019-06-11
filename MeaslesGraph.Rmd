@@ -1,0 +1,75 @@
+---
+title: "Measles Outbreak"
+subtitle: "Presentation"
+author: "Harry Ramirez"
+date: "June 10, 2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<style>
+.myClass1 {
+    line-height: 16pt;
+    font-size: 14pt;
+}
+.myClass2 {
+    line-height: 14pt;
+    font-size: 12pt;
+}
+</style>
+
+## Code - Part 1
+
+```{r echo = TRUE, message=F, warning=F, class.source='myClass1', comment=""}
+library(plotly)
+measles <- read.csv("MeaslesCases_5_30_2019.csv")
+head(measles, 3)
+```
+```{r echo = TRUE, class.source='myClass1'}
+measles$Monthly <- measles$Cases / measles$Month
+graphTitle <- paste0("US Measles Cases<br>",
+                     "<span style=\"font-size: 85%;",
+                     "color: #144e75\">",
+                     "** Up to May 30, 2019</span>")
+```
+
+## Code - Part 2
+
+```{r echo = TRUE, class.source='myClass2'}
+p <- plot_ly(data = measles,
+             x = ~Year,
+             y = ~Cases,
+             type = 'bar',
+             name = 'Year Cases') %>%
+    add_trace(y = ~Monthly,
+              name = 'Monthly Cases') %>%
+    add_lines(y = ~median(Cases),
+              x = ~c(min(Year)-.5, Year, max(Year)+.5),
+              line = list(color = '#144E75',
+                          dash = 'dash',
+                          width = 2),
+              name = "Year Median") %>% 
+    add_lines(y = ~median(Monthly),
+              x = ~c(min(Year)-.5, Year, max(Year)+.5),
+              line = list(color = '#144E75',
+                          width = 2),
+              name = "Monthly Median") %>% 
+    layout(title = list(text = graphTitle,
+           font = list(size=20)),
+           margin = list(l = 10, r = 10, b = 50, t = 110, pad = 4),
+           yaxis = list(title = 'Cases Count'),
+           xaxis = list(tickangle = 45),
+           barmode = 'group')
+```
+
+## US Measles Outbreak - 2019
+
+```{r echo = FALSE, out.width='100%'}
+p
+````
+
+<br style="magin_top: 50px;">
+<font size="1">Data extracted from the [CDC Website](https://www.cdc.gov/measles/cases-outbreaks.html).</font>
