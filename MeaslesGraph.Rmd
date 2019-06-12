@@ -3,7 +3,9 @@ title: "Measles Outbreak"
 subtitle: "Presentation"
 author: "Harry Ramirez"
 date: "June 11, 2019"
-output: ioslides_presentation
+output: 
+  ioslides_presentation: 
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -19,11 +21,43 @@ knitr::opts_chunk$set(echo = FALSE)
     line-height: 14pt;
     font-size: 12pt;
 }
+.myClass3 {
+    line-height: 18pt;
+    font-size: 16pt;
+}
+
+h3 {
+    color: #515151;
+}
+
 </style>
+
+## Definitions
+
+### Outbreak
+
+<div class='myClass3'>
+According to the [CDC](https://www.cdc.gov/csels/dsepd/ss1978/lesson1/section11.html), **Epidemic** refers to an increase, often sudden, in the number of cases of a disease above what is normally expected in that population in that area. **Outbreak** carries the same definition of epidemic, but is often used for a more limited geographic area.
+</div>
+### Measles (Rubeola)
+
+<div class='myClass3'>
+[Measles](https://www.cdc.gov/vaccines/pubs/surv-manual/chpt07-measles.html) is an acute viral illness caused by a virus in the family paramyxovirus, genus Morbillivirus. Measles is characterized by a prodrome of fever (as high as 105°F) and malaise, cough, coryza, and conjunctivitis, followed by a maculopapular rash. The rash spreads from head to trunk to lower extremities. Measles is usually a mild or moderately severe illness. However, measles can result in complications such as pneumonia, encephalitis, and death. 
+</div>
+
+## Methodology
+
+1. Data from January 1st, 2010 to May 30, 2019 was extracted from the CDC's [webpage on Measles](https://www.cdc.gov/measles/cases-outbreaks.html).
+
+2. R code was developed to load, summarize and plot the case data.
+
+3. Conclusions were derived from summary statistics and graphs.
+
+4. R Markdown was used to create the final presentation.
 
 ## R Code - Part 1
 
-```{r echo = TRUE, message=F, warning=F, class.source='myClass1', comment=""}
+```{r echo = TRUE, message=F, warning=F, class.source='myClass2', comment=""}
 library(plotly)
 library(dplyr)
 library(formattable)
@@ -32,12 +66,16 @@ library(formattable)
 measles <- read.csv("MeaslesCases_5_30_2019.csv")
 head(measles, 3)
 ```
-```{r echo = TRUE, class.source='myClass1'}
-measles$Monthly <- measles$Cases / measles$Months
-graphTitle <- paste0("US Measles Cases<br>",
+```{r echo = TRUE, class.source='myClass2'}
+# Calc summary statistics 
+measles$Rate <- measles$Cases / measles$Months
+casesMedian <- median(measles$Cases)
+rateMedian <- median(measles$Rate)
+
+graphTitle <- paste0("Measles Reported Cases<br>",
                      "<span style=\"font-size: 85%;",
                      "color: #144e75\">",
-                     "** Up to May 30, 2019</span>")
+                     "Jan 1st, 2010 to May 30, 2019</span>")
 ```
 
 ## R Code - Part 2
@@ -49,29 +87,29 @@ p <- plot_ly(data = measles,
              y = ~Cases,
              type = 'bar',
              name = 'Year Cases') %>%
-    add_trace(y = ~Monthly,
-              name = 'Monthly Cases') %>%
-    add_lines(y = ~median(Cases),
+    add_trace(y = ~Rate,
+              name = 'Monthly Rate') %>%
+    add_lines(y = casesMedian,
               x = ~c(min(Year)-.5, Year, max(Year)+.5),
               line = list(color = '#144E75',
                           dash = 'dash',
                           width = 2),
-              name = "Year Median") %>% 
-    add_lines(y = ~median(Monthly),
+              name = "Case Median") %>% 
+    add_lines(y = rateMedian,
               x = ~c(min(Year)-.5, Year, max(Year)+.5),
               line = list(color = '#144E75',
                           dash = 'dot',
                           width = 2),
-              name = "Monthly Median") %>% 
+              name = "Rate Median") %>% 
     layout(title = list(text = graphTitle,
            font = list(size=20)),
            margin = list(l = 10, r = 10, b = 50, t = 110, pad = 4),
-           yaxis = list(title = 'Cases Count'),
+           yaxis = list(title = 'Case Count'),
            xaxis = list(tickangle = 45),
            barmode = 'group')
 ```
 
-## US Measles Outbreak - 2019
+## US Measles Incidence `r first(measles$Year)` - `r last(measles$Year)`
 
 ```{r echo = FALSE, out.width='100%'}
 p
@@ -82,12 +120,18 @@ p
 
 ## Conclusions
 
-- Up to May 30, the monthly rate of Measles cases during 2019 is `r last(measles$Monthly)`. That's **`r percent(last(measles$Monthly) / median(measles$Monthly), 1)`** the last `r nrow(measles)` years monthly median.
+<div class='myClass3'>
+- The total cases reported for the period between January 1st, `r first(measles$Year)` and May 30, `r last(measles$Year)` have a median of `r casesMedian` cases per year.
 
-- With only five month of data, 2019's up to date cases are `r last(measles$Cases)`. That's **`r percent(last(measles$Cases) / median(measles$Cases))`** the last `r nrow(measles)` years median for hole years.
+- The total cases reported from January 1st to May 30, `r last(measles$Year)` were `r last(measles$Cases)`, that represents a **`r digits(last(measles$Cases) / casesMedian, 2)` fold** the median cases per year.
 
-- We have an Outbreak.
+- The median of the monthly cases rate for the last `r nrow(measles)` years was `r digits(rateMedian, 2)` cases per month. 
 
-<br style="margin-top: 100px">
+- The monthly rate of cases reported from January 1st to May 30, `r last(measles$Year)` was `r last(measles$Rate)` cases per month, that represents a **`r digits(last(measles$Rate) / rateMedian, 2)` fold** the median cases per month for the `r nrow(measles)` year period.
+
+- The data shows a significant increase from the normally reported cases for the first five months of 2019, that increase can be categorize as an outbreak by CDC's definition.
+</div>
+
+<br style="margin-top: 70px">
 
 #### **Thanks.**
