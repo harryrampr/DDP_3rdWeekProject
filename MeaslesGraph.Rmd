@@ -59,6 +59,7 @@ According to the [CDC](https://www.cdc.gov/csels/dsepd/ss1978/lesson1/section11.
 
 4. R Markdown and Plotly were used to create the final presentation.
 
+
 ## R Code - Part 1
 
 ```{r echo = TRUE, message=F, warning=F, class.source='myClass2', comment=""}
