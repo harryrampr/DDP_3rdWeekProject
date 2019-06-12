@@ -60,7 +60,7 @@ According to the [CDC](https://www.cdc.gov/csels/dsepd/ss1978/lesson1/section11.
 4. R Markdown and Plotly were used to create the final presentation.
 
 
-## R Code - Part 1
+## R Code
 
 ```{r echo = TRUE, message=F, warning=F, class.source='myClass2', comment=""}
 library(plotly)
@@ -83,7 +83,7 @@ graphTitle <- paste0("Measles Reported Cases<br>",
                      "Jan 1st, 2010 to May 30, 2019</span>")
 ```
 
-## R Code - Part 2
+***
 
 ```{r echo = TRUE, class.source='myClass2'}
 # Create bar graph
@@ -138,6 +138,11 @@ p
 - The data shows a significant increase from the normally reported cases for the first five months of 2019, that increase can be categorize as an outbreak by CDC's definition.
 </div>
 
-<br style="margin-top: 70px">
+## Reproducibility
+<br style="margin-top: 10px">
+
+Data and source code to reproduce the presentation is available at Github under **harryrampr** user name or just go to: https://bit.ly/2wSEGmQ
+
+<br style="margin-top: 20px">
 
 #### **Thanks.**
