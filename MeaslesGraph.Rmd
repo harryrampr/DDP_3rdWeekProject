@@ -121,14 +121,11 @@ p
 ````
 
 <br style="magin_top: 50px;">
-<<<<<<< HEAD
 <p class="myClass4">\* Data extracted from the [CDC Website](https://www.cdc.gov/measles/cases-outbreaks.html).</p>
 
 <p class="myClass4">** Use zoom and pan controls to view details.</p>
-=======
 <p class="myClass4">*Data extracted from the [CDC Website](https://www.cdc.gov/measles/cases-outbreaks.html).</p>
 <p class="myClass4">**Use zoom function to view details.</p>
->>>>>>> 4542d5ac2d354820cc28a30eaaa462546976ef02
 
 ## Conclusions
 
