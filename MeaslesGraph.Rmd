@@ -25,6 +25,10 @@ knitr::opts_chunk$set(echo = FALSE)
     line-height: 18pt;
     font-size: 16pt;
 }
+.myClass4 {
+    line-height: 12pt;
+    font-size: 10pt;
+}
 
 h3 {
     color: #515151;
@@ -47,11 +51,11 @@ According to the [CDC](https://www.cdc.gov/csels/dsepd/ss1978/lesson1/section11.
 
 ## Methodology
 
-1. Data from January 1st, 2010 to May 30, 2019 was extracted from the CDC's [webpage on Measles](https://www.cdc.gov/measles/cases-outbreaks.html).
+1. Measles data from January 1st, 2010 to May 30, 2019 was extracted from the CDC's [webpage](https://www.cdc.gov/measles/cases-outbreaks.html).
 
 2. R code was developed to load, summarize and plot the case data.
 
-3. Conclusions were derived from summary statistics and graphs.
+3. Conclusions were derived from definitions, summary statistics and graphs.
 
 4. R Markdown was used to create the final presentation.
 
@@ -103,7 +107,7 @@ p <- plot_ly(data = measles,
               name = "Rate Median") %>% 
     layout(title = list(text = graphTitle,
            font = list(size=20)),
-           margin = list(l = 10, r = 10, b = 50, t = 110, pad = 4),
+           margin = list(l = 10, r = 10, b = 50, t = 120, pad = 4),
            yaxis = list(title = 'Case Count'),
            xaxis = list(tickangle = 45),
            barmode = 'group')
@@ -116,7 +120,8 @@ p
 ````
 
 <br style="magin_top: 50px;">
-<font size="1">Data extracted from the [CDC Website](https://www.cdc.gov/measles/cases-outbreaks.html).</font>
+<p class="myClass4">*Data extracted from the [CDC Website](https://www.cdc.gov/measles/cases-outbreaks.html).</p>
+<p class="myClass4">**Use zoom function to view details.</p>
 
 ## Conclusions
 
