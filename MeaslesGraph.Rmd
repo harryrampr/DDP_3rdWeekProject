@@ -122,10 +122,7 @@ p
 
 <br style="magin_top: 50px;">
 <p class="myClass4">\* Data extracted from the [CDC Website](https://www.cdc.gov/measles/cases-outbreaks.html).</p>
-
 <p class="myClass4">** Use zoom and pan controls to view details.</p>
-<p class="myClass4">*Data extracted from the [CDC Website](https://www.cdc.gov/measles/cases-outbreaks.html).</p>
-<p class="myClass4">**Use zoom function to view details.</p>
 
 ## Conclusions
 
